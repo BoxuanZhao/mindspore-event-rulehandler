@@ -34,38 +34,50 @@ def rule_generator(issue):
         return [user_activity, user_habit]
 
     issue_user_activity, issue_user_habit = label_user_profile(issue_user_login)
-    print(issue_user_login, issue_user_activity, issue_user_habit)
+    print(f"{issue_user_login}: {issue_user_activity}, {issue_user_habit}")
 
     # Step 2: Iterable rule generators with user profile
     def info_rule_generator(user_activity, user_habit):
         user_rules = pd.read_csv('./data/rule_generator/issue_label_rule_generator.csv')
         user_rules = user_rules.set_index('user_habit')
-        community_assignee_list = ['lizi', 'mfl']
+        community_assignee_list = ['lizi', 'mfl']  # Community Maintainer
 
+        with open("./data/rule_generator/info_text_template.json", 'r',  encoding='UTF-8') as load_f:
+            info_text_template = pd.DataFrame(json.load(load_f)).set_index("infoType")
+
+        execute_time = issue['issueUpdateTime']
         rules = []
 
-        if user_activity == 0 and user_habit == 0:
-            return 0
-        else:
-            info_rule = json.loads(user_rules[user_activity][user_habit])
-
-            print(info_rule)
-
-            execute_time = issue['issueUpdateTime']
+        if user_activity == 'first_issuer' and user_habit == 'none':
 
             info_payload = {
-                'targetUser': issue_user_login,
-                'infoType': info_rule['info_type']
+                'targetUser': community_assignee_list,
+                'infoType': 'issueComment',
+                'infoContent': info_text_template['infoText']['assign_maintainer']
             }
-
             rule = {
                 'issueID': issue['issueID'],
                 'ruleType': 'info',
                 'exeTime': execute_time,
                 'infoPayload': info_payload
             }
-
             rules.append(rule)
+
+        info_rule = json.loads(user_rules[user_activity][user_habit])
+        # print(info_rule)
+
+        info_payload = {
+            'targetUser': issue_user_login,
+            'infoType': info_rule['info_type'],
+            'infoContent': info_text_template['infoText']['label_without_recommendation']
+        }
+        rule = {
+            'issueID': issue['issueID'],
+            'ruleType': 'info',
+            'exeTime': execute_time,
+            'infoPayload': info_payload
+        }
+        rules.append(rule)
 
         return rules
 
@@ -82,7 +94,7 @@ def rule_generator(issue):
 if __name__ == "__main__":
     issue_str = '{"issueID":"issueIDabc123", ' \
                 '"issueAction":"issueAction：Create、Del...",' \
-                '"issueUser":"david-he91",' \
+                '"issueUser":"david-he9",' \
                 '"issueUserID":"issueUserIDabc123",' \
                 '"issueTime":"RFC3399",' \
                 '"issueUpdateTime":"2021-10-14T20:26:30+08:00",' \

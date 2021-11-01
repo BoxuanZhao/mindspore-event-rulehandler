@@ -1,0 +1,66 @@
+[{
+    "infoType": "assignee_recommendation",
+    "infoText": { 
+        "English": "hello, @{issueMaker} , we suggest you assign this issue to: ",
+        "Chinese": "你好, @{issueMaker} , 建议您将这个issue分配给：",
+        "general_content": "{issueAssignee}, {issueCoAssignee}"
+    }
+},
+{
+    "infoType": "label_with_recommendation",
+    "infoText": { 
+        "English": "hello, @{issueMaker} @{assignee} , we suggest you add some labels like: ",
+        "Chinese": "你好, @{issueMaker} @{assignee} {goodissue} , 建议您为这个issue打上标签：",
+        "general_content": "{label}"
+    }
+},
+{
+    "infoType": "label_without_recommendation",
+    "infoText": { 
+        "English": "",
+        "Chinese": "",
+        "general_content":[
+            "Please add labels (comp or sig), also you can visit https://gitee.com/mindspore/community/blob/master/sigs/dx/docs/labels.md to find more.",
+            "为了让代码尽快被审核，请您为Pull Request打上 **组件(comp)或兴趣组(sig)** 标签，打上标签的PR可以直接推送给责任人进行审核。",
+            "更多的标签可以查看https://gitee.com/mindspore/community/blob/master/sigs/dx/docs/labels.md",
+            "以组件相关代码提交为例，如果你提交的是data组件代码，你可以这样评论：",
+            "//comp/data",
+            "当然你也可以邀请data SIG组来审核代码，可以这样写：",
+            "//sig/data",
+            "另外你还可以给这个PR标记类型，例如是bugfix或者是特性需求：",
+            "//kind/bug or //kind/feature",
+            "恭喜你，你已经学会了使用命令来打标签，接下来就在下面的评论里打上标签吧！"]
+    }
+},
+{
+    "infoType": "assign_maintainer",
+    "infoText": { 
+        "English": "Please assign maintainer to check this issue.",
+        "Chinese": "请为此issue分配处理人。",
+        "general_content": "@{mainCaller1} @{mainCaller2}"
+    }
+},
+{
+    "infoType": "add_detail",
+    "infoText": { 
+        "English": "Please use this template to give more details, ",
+        "Chinese": "请使用以下问题模板反馈更多需要决策的信息：",
+        "general_content": [
+            "**Solution Analysis(方案分析)：**",
+            "**Decision Point(决策点)：**",
+            "**References(相关材料)：**",
+            "**Person in Charge(责任人):**",
+            "**Relevant People(相关人):**",
+            "**Submission Time(提交时间):**",
+            "**Conclusion(结论):**"]
+    }
+},
+{
+    "infoType": "close_issue",
+    "infoText": { 
+        "English": "Issue resolved? If it is in progress, please change the status to WIP. If the issue was solved, please close this issue, thanks!",
+        "Chinese": "@{issueMaker} @{assignee} 这个问题是否已经解决了呢？ 如果正在进行中，请把issue状态设置为WIP；如果问题已解决，请关闭这个issue， 谢谢！",
+        "general_content": ""
+    }
+}
+]
