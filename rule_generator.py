@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def rule_generator(issue):
-    issue_user_login = issue['issueUser']
+    issue_user_login = issue['issueUserID']
 
     # Step 1: 2 dimensions of user profile
     def label_user_profile(user):
